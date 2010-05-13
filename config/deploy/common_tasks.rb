@@ -23,7 +23,7 @@ namespace :mod_rails do
   Restart the application altering tmp/restart.txt for mod_rails.
   DESC
   task :restart, :roles => :app do
-    run "touch  #{current_path}/tmp/restart.txt"
+    run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
   end
 
   desc "Hard restart your passenger instances by killing the dispatcher"
@@ -111,7 +111,7 @@ namespace :deploy do
 
       desc "Create #{file} file in shared_path"
       task task_name, :roles => :app do
-        template = File.read(File.join(File.dirname(__FILE__), "deploy/templates", "#{file}.erb"))
+        template = File.read(File.join(File.dirname(__FILE__), "templates", "#{file}.erb"))
         result = ERB.new(template).result(binding)
 
         run "mkdir -p #{shared_path}/config"
