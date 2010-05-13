@@ -13,6 +13,7 @@ after "deploy:update", "deploy:assets"
 # Clean releases after deployment
 after "deploy:migrations", "deploy:cleanup"
 after "deploy:default", "deploy:cleanup"
+after "deploy", "deploy:cleanup"
 
 
 # Tasks for mod_rails
