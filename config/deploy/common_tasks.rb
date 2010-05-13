@@ -26,15 +26,12 @@ namespace :mod_rails do
     run "touch  #{current_path}/tmp/restart.txt"
   end
 
-	desc "Hard restart your passenger instances by killing the
-dispatcher"
-	task :hard_restart, :roles => :app, :except => {:no_release =>
-		true} do
-			restart
-			run "pkill -f '^Rails: #{deploy_to}' || true"
-			run "pkill -f '^Passenger ApplicationSpawner: #{deploy_to}' ||
-true"
-		end
+  desc "Hard restart your passenger instances by killing the dispatcher"
+  task :hard_restart, :roles => :app, :except => {:no_release => true} do
+    restart
+    run "pkill -f '^Rails: #{deploy_to}' || true"
+    run "pkill -f '^Passenger ApplicationSpawner: #{deploy_to}' || true"
+  end
 end
 
 # Deployment tasks
